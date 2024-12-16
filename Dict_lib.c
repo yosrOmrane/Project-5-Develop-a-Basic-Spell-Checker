@@ -25,15 +25,3 @@ bool load() {
 	for (int i = 0; i < N; i++) {
 		root->children[i] = NULL;
 	}
-
-	// open dictionary file
-	FILE* file = fopen("words.txt", "r");
-	if (file == NULL) {
-		unload();
-		return false;
-	}
-
-	// buffer for each word
-	char word[LENGTH + 1];
-	int idx;
-
