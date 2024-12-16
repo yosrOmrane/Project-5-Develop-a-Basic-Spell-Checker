@@ -62,3 +62,20 @@ bool load() {
 
 	return true;
 }
+int size(void) {
+	return _size;
+}
+
+bool check(const char* word) {
+	int idx;
+	node* child = root;
+	for (int i = 0, len = strlen(word); i < len; i++) {
+		idx = (int)tolower(word[i]) - (int)'a';
+
+		child = child->children[idx];
+		if (child == NULL) {
+			return false;
+		}
+	}
+	return child->isWord;
+}
