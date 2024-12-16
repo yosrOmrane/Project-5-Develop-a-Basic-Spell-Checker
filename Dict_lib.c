@@ -79,3 +79,18 @@ bool check(const char* word) {
 	}
 	return child->isWord;
 }
+void unloadNode(node* top) {
+	if (top == NULL)
+		return;
+
+	for (int i = 0; i < N; i++) {
+		if (top->children[i] != NULL) {
+			unloadNode(top->children[i]);
+		}
+	}
+	free(top);
+}
+
+void unload() {
+	unloadNode(root);
+}
