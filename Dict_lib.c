@@ -35,3 +35,30 @@ bool load() {
 	// buffer for each word
 	char word[LENGTH + 1];
 	int idx;
+   // insert each word into trie
+	while (fscanf(file, "%s", word) != EOF) {
+		node* child = root;
+
+		for (int i = 0, len = strlen(word); i < len; i++) {
+			idx = (int)word[i] - (int)'a';
+
+			if (child->children[idx] == NULL) { // node doesn't exist
+				child->children[idx] = malloc(sizeof(node));
+				if (child->children[idx] == NULL) { // error with malloc
+					return false;
+				}
+				child->children[idx]->isWord = false;
+				for (int j = 0; j < N; j++) {
+					child->children[idx]->children[j] = NULL;
+				}
+			}
+			child = child->children[idx];
+		}
+		child->isWord = true;
+		_size++;
+	}
+
+	fclose(file);
+
+	return true;
+}
