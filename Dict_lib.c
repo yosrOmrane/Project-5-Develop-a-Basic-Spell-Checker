@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "dictionary.h"
+#include "dict_lib.h"
 
 #define N 26
 
