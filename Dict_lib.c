@@ -62,7 +62,7 @@ bool load() {
 
 	return true;
 }
-int size(void) {
+unsigned int size(void) {
 	return _size;
 }
 
