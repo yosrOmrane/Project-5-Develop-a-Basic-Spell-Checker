@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // open txt file
+    // open txt file to check
     FILE *file = fopen(filename, "r");
     if (file == NULL)
     {
@@ -68,11 +68,11 @@ int main(int argc, char *argv[])
     }
 
     // cleanup
-    // close file
-    fclose(file);
+
+    fclose(file); // close file
 
     // unload dictionary
-    unload();
+    unload(); // unload dictionary
 
     // print out statistics
     printf("\nDictionary word count: %d", size());
