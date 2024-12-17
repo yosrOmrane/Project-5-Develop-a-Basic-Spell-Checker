@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // open text file
+    // open txt file
     FILE *file = fopen(filename, "r");
     if (file == NULL)
     {
