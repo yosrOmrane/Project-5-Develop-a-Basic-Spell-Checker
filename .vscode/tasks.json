@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile avec GCC",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-Wall",             // Activer tous les avertissements
+                "-Wextra",           // Plus d'avertissements
+                "-g3",               // Ajouter des informations de débogage
+                "checking.c",            // Votre fichier principal
+                "Dict_lib.c",        // Les autres fichiers
+                "-o",                // Option pour nommer l'exécutable
+                "spell_checker.exe"  // Nom du fichier exécutable
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
+

@@ -26,7 +26,7 @@ bool load() {
 		root->children[i] = NULL;
 	}
 // open dictionary file
-	FILE* file = fopen("words.txt", "r");
+	FILE* file = fopen("ValidWords.txt", "r");
 	if (file == NULL) {
 		unload();
 		return false;
