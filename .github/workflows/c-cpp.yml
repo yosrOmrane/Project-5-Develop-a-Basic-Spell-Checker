@@ -3,27 +3,33 @@ name: C Program CI
 on:
   push:
     branches:
-      - main  
+      - main
   pull_request:
     branches:
-      - main  
+      - main
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  
+      uses: actions/checkout@v2
 
-    - name: Set up GCC (if not using a Makefile)
-      run: sudo apt-get install gcc  
+    - name: Set up GCC and Make
+      run: sudo apt-get install -y build-essential  # Installs gcc, make, and other build tools
+
+    - name: Create test.txt
+      run: echo "This is a test" > test.txt  # Creates a test file for the program
 
     - name: Compile C program
-      run: gcc -o spellcheck main.c dict_lib.c  
+      run: gcc -v -o spellcheck main.c dict_lib.c  # Compile program with verbose output for debugging
+
+    - name: List files (Debugging step)
+      run: ls -al  # List all files in the repo for debugging purposes
 
     - name: Run tests
-      run: ./spellcheck test.txt  
+      run: ./spellcheck test.txt  # Run the compiled program
 
-    - name: Clean up (optional)
-      run: rm spellcheck  
+    - name: Clean up
+      run: rm spellcheck  # Optional: Clean up binary after test
