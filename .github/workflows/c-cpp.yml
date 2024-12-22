@@ -1,33 +1,42 @@
-name: Test Spellcheck Program 
+name: Test Spellcheck Program
 
 on:
   push: 
     branches:
-      - main 
+      - main
   pull_request: # Trigger the workflow when a pull request is created or updated.
 
 jobs:
   build-and-test: # The name of the job.
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
 
     steps:
       # Step 1: Checkout the repository code
-      - name: Checkout code 
-        uses: actions/checkout@v3 
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      # Step 2: Install GCC compiler
-      - name: Install GCC 
-        run: sudo apt-get install -y gcc 
+      # Step 2: Install GCC compiler and necessary tools
+      - name: Install GCC and DiffUtils
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc diffutils
 
-      # Step 3: Compile the test_code program
-      - name: Build the program 
-        run: gcc -o spellcheck test_code.c dict_lib.c 
+      # Step 3: Compile the spellcheck program
+      - name: Build the program
+        run: gcc -o spellcheck test_code.c Dict_lib.c
 
-      # Step 4: Run the spellcheck program with a test dataset
-      - name: Run the test 
-        run: ./spellcheck testdataset.txt 
+      # Step 4: Run the spellcheck program with the test dataset and capture the output
+      - name: Run the test
+        run: |
+          ./spellcheck testdataset.txt > actual_output.txt
+          echo "Test run complete, comparing outputs."
 
-      # Step 5: Check for test failures
-      - name: Check test result # Fail the job if the test results are not as expected.
-        if: failure() # This step runs only if the previous step (Run the test) fails.
-        run: exit 1 # Explicitly fails the job by exiting with a non-zero status code.
+      # Step 5: Compare the actual output with the expected output
+      - name: Compare output
+        run: |
+          if diff actual_output.txt expected_output.txt; then
+            echo "Test passed!";
+          else
+            echo "Test failed: Outputs do not match.";
+            exit 1; # Explicitly fail the job if outputs don't match
+          fi
