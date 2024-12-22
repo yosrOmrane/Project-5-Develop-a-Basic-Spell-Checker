@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    char *filename = (argc == 2) ? argv[1] : "test2.txt";
+    char *filename = (argc == 2) ? argv[1] : "testfile1.txt";
     printf("File to be checked: %s\n", filename);
 
     // load dictionary

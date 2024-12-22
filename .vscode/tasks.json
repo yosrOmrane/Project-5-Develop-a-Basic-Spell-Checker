@@ -13,6 +13,7 @@
                 "Dict_lib.c",        // Les autres fichiers
                 "-o",                // Option pour nommer l'exécutable
                 "spell_checker.exe"  // Nom du fichier exécutable
+                
             ],
             "group": {
                 "kind": "build",
