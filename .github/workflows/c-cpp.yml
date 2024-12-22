@@ -1,4 +1,4 @@
-name: Test Spellcheck Program
+name: Testing Program
 
 on:
   push: 
@@ -21,14 +21,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gcc diffutils
 
-      # Step 3: Compile the spellcheck program
+      # Step 3: Compile the testing program
       - name: Build the program
-        run: gcc -o spellcheck test_code.c Dict_lib.c
+        run: gcc -o testing test_code.c Dict_lib.c
 
-      # Step 4: Run the spellcheck program with the test dataset and capture the output
+      # Step 4: Run the testing program with the test dataset and capture the output
       - name: Run the test
         run: |
-          ./spellcheck testdataset.txt > actual_output.txt
+          ./testcode testdataset.txt > actual_output.txt
           echo "Test run complete, comparing outputs."
 
       # Step 5: Compare the actual output with the expected output

@@ -10,21 +10,28 @@ bool run_test(FILE *file, int test_case_num) {
     char input_filename[100], expected_output[1024];
     char actual_output[1024] = {0};  // To hold the actual output
     FILE *input_file;
-    int idx = 0;
 
     // Read input filename and expected output
     if (fscanf(file, "%s", input_filename) != 1) {
         if (feof(file)) {
-            return false;
+            printf("End of file reached.\n");
+            return false;  // End of file reached
         }
         printf("Test case %d: Error reading input file name\n", test_case_num);
         return false;
     }
 
-    if (fscanf(file, "%[^\n]", expected_output) != 1) {
+    // Debug print to check the filename
+    printf("Test case %d: Reading file %s\n", test_case_num, input_filename);
+
+    // Read expected output, ensuring to read a full line
+    if (fscanf(file, " %[^\n]", expected_output) != 1) {  // Notice the space before %[^\n] to ignore any leading whitespace
         printf("Test case %d: Error reading expected output\n", test_case_num);
         return false;
     }
+
+    // Debug print to check expected output
+    printf("Test case %d: Expected output: %s\n", test_case_num, expected_output);
 
     // Open input text file
     input_file = fopen(input_filename, "r");
@@ -36,7 +43,8 @@ bool run_test(FILE *file, int test_case_num) {
     // Run the spell checker program (same logic as in `spellcheck.c` but redirect output)
     int index = 0, words = 0, misspellings = 0;
     char word[LENGTH + 1];
-    
+
+    // Read words from input file and check for misspellings
     while (fscanf(input_file, "%s", word) != EOF) {
         words++;
         if (!check(word)) {
@@ -66,14 +74,13 @@ int main() {
         perror("Error opening dataset file");
         return 1;
     }
-
-    int test_case_num = 0;
     int passed = 0, failed = 0;
+    int num_test_cases = 3;  // We know the number of test cases is 3
 
     printf("Running tests...\n");
 
-    while (!feof(file)) {
-        test_case_num++;
+    // Using a for loop since we know there are 3 test cases
+    for (int test_case_num = 1; test_case_num <= num_test_cases; test_case_num++) {
         if (!run_test(file, test_case_num)) {
             failed++;
         } else {
