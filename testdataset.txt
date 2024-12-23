@@ -1,6 +1,4 @@
-testfile1.txt
-goooooood everyhwone 
-testfile2.txt 
-texxxt twwoo
-testfile3.txt
-projiicte shiiit 
+testfile1.txt goooooood everyhwone 
+testfile2.txt texxxt twwoo
+testfile3.txt projiicte shiiit 
+
