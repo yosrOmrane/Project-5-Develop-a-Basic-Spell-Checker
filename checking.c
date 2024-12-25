@@ -1,10 +1,11 @@
-#include <stdio.h>
-#include <ctype.h>
-#include "Dict_lib.h"
+#include <stdio.h>    // Standard library for input/output functions
+#include <ctype.h>    // Library for character manipulation
+#include "Dict_lib.h" //Custom library, likely used for dictionary management with functions like load, check, unload, and size.
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]) // The main function takes command-line arguments.
 {
-    char *filename = (argc == 2) ? argv[1] : "testfile1.txt";
+    char *filename = (argc == 2) ? argv[1] : "testfile1.txt"; // If the user provides a filename as an argument, it is used. Otherwise, the program uses "testfile1.txt" as the default file.
+
     printf("File to be checked: %s\n", filename);
 
     // load dictionary
