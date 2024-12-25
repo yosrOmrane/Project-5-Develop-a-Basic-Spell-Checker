@@ -25,7 +25,7 @@ bool load() {
 	for (int i = 0; i < N; i++) {
 		root->children[i] = NULL;
 	}
-// open dictionary file
+    // open dictionary file
 	FILE* file = fopen("ValidWords.txt", "r");
 	if (file == NULL) {
 		unload();
@@ -35,7 +35,7 @@ bool load() {
 	// buffer for each word
 	char word[LENGTH + 1];
 	int idx;
-   // insert each word into trie
+    // insert each word into trie
 	while (fscanf(file, "%s", word) != EOF) {
 		node* child = root;
 

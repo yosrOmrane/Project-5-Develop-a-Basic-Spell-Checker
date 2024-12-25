@@ -23,9 +23,9 @@ bool run_test(FILE *file, int test_case_num) {
 
     // Debug print to check the filename
     printf("Test case %d: Reading file %s\n", test_case_num, input_filename);
-
+    
     // Read expected output, ensuring to read a full line
-    if (fscanf(file, " %[^\n]", expected_output) != 1) {  // Notice the space before %[^\n] to ignore any leading whitespace
+    if (fscanf(file, "%[^\n]", expected_output) != 1) {  // Notice the space before %[^\n] to ignore any leading whitespace
         printf("Test case %d: Error reading expected output\n", test_case_num);
         return false;
     }
@@ -50,7 +50,7 @@ bool run_test(FILE *file, int test_case_num) {
         if (!check(word)) {
             misspellings++;
             strcat(actual_output, word);  // Append misspelled word
-            strcat(actual_output, "\n");
+            strcat(actual_output, " ");
         }
     }
 
